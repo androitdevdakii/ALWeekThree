@@ -12,9 +12,18 @@ page 50125 NumericalFunctions
         {
             group("Armstrong number")
             {
-                field(MNumber; MNumber)
+                field(MyArmstrongNo; MyArmstrongNo)
                 {
                     Caption = 'No';
+                }
+            }
+
+            group("Armstrong number Digits")
+            {
+                field(MyArmstrongNoDigits; MyArmstrongNoDigits)
+                {
+                    Caption = 'No';
+                    Editable = false;
                 }
             }
         }
@@ -24,18 +33,27 @@ page 50125 NumericalFunctions
     {
         area(Processing)
         {
-            action(ActionName)
+            action(CheckArmstrong)
             {
                 ApplicationArea = All;
-
+                Caption = 'Check ArmStrong No';
                 trigger OnAction()
                 begin
-
+                    CheckArmstrongNo();
                 end;
             }
         }
     }
 
     var
-        MNumber: Integer;
+        MyArmstrongNo: Integer;
+
+    local procedure CheckArmstrongNo(NoToCheck: Integer)
+    var
+        MyArmstrongNoDigits: Text[10];
+
+    begin
+        MyArmstrongNoDigits := Format(NoToCheck);
+    end;
+
 }
