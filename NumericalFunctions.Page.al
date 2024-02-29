@@ -22,7 +22,12 @@ page 50125 NumericalFunctions
             {
                 field(MyArmstrongNoDigits; MyArmstrongNoDigits)
                 {
-                    Caption = 'No';
+                    Caption = 'Armstrong Digits';
+                    Editable = false;
+                }
+
+                field(IsArmstrong; IsArmstrong)
+                {
                     Editable = false;
                 }
             }
@@ -39,7 +44,7 @@ page 50125 NumericalFunctions
                 Caption = 'Check ArmStrong No';
                 trigger OnAction()
                 begin
-                    CheckArmstrongNo(MyArmstrongNo);
+                    IsArmstrong := CheckArmstrongNo(MyArmstrongNo);
                 end;
             }
         }
@@ -48,25 +53,37 @@ page 50125 NumericalFunctions
     var
         MyArmstrongNo: Integer;
         MyArmstrongNoDigits: Text[10];
+        IsArmstrong: Boolean;
 
     local procedure CheckArmstrongNo(NoToCheck: Integer): Boolean
     var
-        NumberOfDigits, TempNo, Sum, Digit : Integer;
+        NumberOfDigits, TempNo, Sum, Digit, i : Integer;
         IssaArmstrongNumber: Boolean;
+        MyArmstrongSingleDigits: List of [Integer];
 
     begin
         // Convert Armstrong Number to string to count digits
         MyArmstrongNoDigits := Format(NoToCheck);
         NumberOfDigits := StrLen(MyArmstrongNoDigits);
 
+        for i := 1 to NumberOfDigits do begin
+
+        end;
+
+        /*foreach Value in EnumerableCollection do begin
+            
+        end;*/
+
         // Calculate Armstrong Number
         TempNo := NoToCheck;
         while TempNo > 0 do begin
             Digit := TempNo MOD 10;
             Sum += Power(Digit, NumberOfDigits);
+            TempNo := TempNo DIV 10;
         end;
+
         IssaArmstrongNumber := Sum = NoToCheck;
-        Message('The Armstrong No is %1, It has %2 digits', NoToCheck, NumberOfDigits);
+        Message('The Armstrong No is %1, It has %2 digits and its sum is %3', NoToCheck, NumberOfDigits, IssaArmstrongNumber);
         exit(IssaArmstrongNumber);
     end;
 
