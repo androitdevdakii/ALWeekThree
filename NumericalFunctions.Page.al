@@ -39,7 +39,7 @@ page 50125 NumericalFunctions
                 Caption = 'Check ArmStrong No';
                 trigger OnAction()
                 begin
-                    CheckArmstrongNo();
+                    CheckArmstrongNo(MyArmstrongNo);
                 end;
             }
         }
@@ -47,13 +47,27 @@ page 50125 NumericalFunctions
 
     var
         MyArmstrongNo: Integer;
-
-    local procedure CheckArmstrongNo(NoToCheck: Integer)
-    var
         MyArmstrongNoDigits: Text[10];
 
+    local procedure CheckArmstrongNo(NoToCheck: Integer; IssaArmstrongNumber: Boolean)
+    var
+        NumberOfDigits, TempNo, Sum, Digit : Integer;
+
+
     begin
+        // Convert Armstrong Number to string to count digits
         MyArmstrongNoDigits := Format(NoToCheck);
+        NumberOfDigits := StrLen(MyArmstrongNoDigits);
+
+        // Calculate Armstrong Number
+        TempNo := NoToCheck;
+        while TempNo > 0 do begin
+            Digit := TempNo MOD 10;
+            Sum += Power(Digit, NumberOfDigits);
+        end;
+        IssaArmstrongNumber := Sum = NoToCheck;
+        Message('The Armstrong No is %1, It has %2 digits', NoToCheck, NumberOfDigits);
+        exit(IssaArmstrongNumber);
     end;
 
 }
