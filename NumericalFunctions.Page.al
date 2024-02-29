@@ -49,10 +49,10 @@ page 50125 NumericalFunctions
         MyArmstrongNo: Integer;
         MyArmstrongNoDigits: Text[10];
 
-    local procedure CheckArmstrongNo(NoToCheck: Integer; IssaArmstrongNumber: Boolean)
+    local procedure CheckArmstrongNo(NoToCheck: Integer): Boolean
     var
         NumberOfDigits, TempNo, Sum, Digit : Integer;
-
+        IssaArmstrongNumber: Boolean;
 
     begin
         // Convert Armstrong Number to string to count digits
