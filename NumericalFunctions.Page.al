@@ -26,6 +26,7 @@ page 50125 NumericalFunctions
                     Editable = false;
                 }
 
+
                 field(IsArmstrong; IsArmstrong)
                 {
                     Editable = false;
@@ -59,26 +60,21 @@ page 50125 NumericalFunctions
     var
         NumberOfDigits, TempNo, Sum, Digit, i : Integer;
         IssaArmstrongNumber: Boolean;
-        MyArmstrongSingleDigits: List of [Integer];
-
+        OutPutText: Text[60];
     begin
         // Convert Armstrong Number to string to count digits
         MyArmstrongNoDigits := Format(NoToCheck);
         NumberOfDigits := StrLen(MyArmstrongNoDigits);
 
-        for i := 1 to NumberOfDigits do begin
-
-        end;
-
-        /*foreach Value in EnumerableCollection do begin
-            
-        end;*/
-
         // Calculate Armstrong Number
         TempNo := NoToCheck;
         while TempNo > 0 do begin
+            // Return single digit by returning modulus 10 of entire number
             Digit := TempNo MOD 10;
+            // Sum the digit
             Sum += Power(Digit, NumberOfDigits);
+            /* Divide No by 10 to reduce No. 
+            Used DIV instead of / cause it doesntt return a Decimal overflow*/
             TempNo := TempNo DIV 10;
         end;
 
