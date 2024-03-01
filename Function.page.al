@@ -87,17 +87,21 @@ page 50148 ExchangeRate
     // We are going to multiply UgxAmount by ExchangeRateAmount to get UsdAmount
 
     local procedure CalculateForeignExchange()
-    // var
-    //     myInt: Integer;
+    var
+        UnRoundedAmount: Decimal;
     begin
         //UgxAmount := 300000;
-        UsdAmount := Abs(UgxAmount) / ExchangeRateAmount;
+
+        UnRoundedAmount := Abs(UgxAmount) / ExchangeRateAmount;
+        UsdAmount := Round(UnRoundedAmount, 1, '>');
+
         // Message('%1', UsdAmount);
     end;
 
     trigger OnOpenPage()
     begin
         ExchangeRateAmount := 3750;
+
     end;
 
 }
