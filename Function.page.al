@@ -16,12 +16,20 @@ page 50148 ExchangeRate
                 {
                     caption = 'Forex Rate';
                     Editable = false;
+
+
                 }
 
 
                 field(UgxAmount; UgxAmount)
                 {
                     Caption = 'Shilling value';
+                    trigger OnValidate()
+                    var
+                        myInt: Integer;
+                    begin
+                        CalculateForeignExchange();
+                    end;
 
                 }
 
@@ -39,13 +47,34 @@ page 50148 ExchangeRate
     {
         area(Processing)
         {
-            action(ActionName)
+            /*  action(ConvertFx)
+             {
+                 ApplicationArea = All;
+
+                 trigger OnAction()
+                 begin
+                     CalculateForeignExchange();
+                 end;
+             } */
+
+            action(Clear)
             {
                 ApplicationArea = All;
 
                 trigger OnAction()
                 begin
-                    CalculateForeignExchange();
+                    Clear(UsdAmount);
+                    Clear(UgxAmount);
+                end;
+            }
+
+            action(ClearAll)
+            {
+                ApplicationArea = All;
+
+                trigger OnAction()
+                begin
+                    ClearAll();
                 end;
             }
         }
@@ -53,16 +82,22 @@ page 50148 ExchangeRate
 
     var
         ExchangeRateAmount, UgxAmount, UsdAmount : Decimal;
+
+
     // We are going to multiply UgxAmount by ExchangeRateAmount to get UsdAmount
+
     local procedure CalculateForeignExchange()
     // var
     //     myInt: Integer;
     begin
-        ExchangeRateAmount := 3750;
         //UgxAmount := 300000;
         UsdAmount := Abs(UgxAmount) / ExchangeRateAmount;
-        Message('%1', UsdAmount);
+        // Message('%1', UsdAmount);
     end;
 
+    trigger OnOpenPage()
+    begin
+        ExchangeRateAmount := 3750;
+    end;
 
 }
