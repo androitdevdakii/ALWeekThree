@@ -20,6 +20,7 @@ page 50125 NumericalFunctions
 
             group("Armstrong number Digits")
             {
+                Caption = 'Armmy';
                 field(MyArmstrongNoDigits; MyArmstrongNoDigits)
                 {
                     Caption = 'Armstrong Digits';
